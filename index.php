@@ -6,13 +6,22 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<?php 
+  
+  include('./config/config.php');
+
+  $query = "SELECT * FROM books";
+  $result = mysqli_query($conn, $query);
+
+?>
 
 <div class="container">
   <h1>BookShop CRUD</h1>
   
   <div class="row main bg-info">
     <div class="col-xs-4">
-      <form role="form" action="index_submit" method="get" accept-charset="utf-8">
+      <h3>Insert Books Form</h3>
+      <form role="form" action="insert.php" method="POST" accept-charset="utf-8">
         <div class="form-group">
           <label for="inp-book-title">Book Title</label>
           <input type="text" id="inp-book-title" name="inp-book-title" class="form-control">
@@ -26,6 +35,7 @@
     </div>
 
     <div class="col-xs-8">
+      <h3>Display All Record Table</h3>
       <table class="table">
         <thead>
           <tr>
@@ -35,14 +45,22 @@
           </tr>
         </thead>
         <tbody>
+
+          <?php 
+            while ($row = mysqli_fetch_assoc($result)) {
+          ?>
           <tr>
-            <td>Java Book</td>
-            <td>$20</td>
+            <td> <?php echo $row['book_title']; ?> </td>
+            <td> <?php echo $row['book_price']; ?> </td>
             <td>
-              <a href="#" class="btn btn-success" role="button">Edit Book</a>
+              <a href="editform.php?id=<?php echo $row['book_id'] ?>" class="btn btn-success" role="button">Edit Book</a>
               <a href="#" class="btn btn-danger" role="button">Delete Book</a>
             </td>
           </tr>
+          <?php 
+            }
+            mysqli_close($conn);
+          ?>
         </tbody>
       </table>
     </div>
