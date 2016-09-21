@@ -54,7 +54,7 @@
             <td> <?php echo $row['book_price']; ?> </td>
             <td>
               <a href="editform.php?id=<?php echo $row['book_id'] ?>" class="btn btn-success" role="button">Edit Book</a>
-              <a href="#" class="btn btn-danger" role="button">Delete Book</a>
+              <a href="delete.php?id=<?php echo $row['book_id'] ?>" class="btn btn-danger" role="button">Delete Book</a>
             </td>
           </tr>
           <?php 
